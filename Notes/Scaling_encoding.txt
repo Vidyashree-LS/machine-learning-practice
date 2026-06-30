@@ -1,0 +1,235 @@
+
+scaling
+1. Standardization
+   * Standard scaler
+   * Robust scales
+2. Normalization
+   * MinMaxScaler
+
+Scaling 
+* It is a preprocessing technique which scales the values equally for all the columns to give equal importance to all the columns.
+
+when to use Scaling?
+* only for numerical column not for object column.
+* when numerical column values are in different range then we use scaling technique.
+* we use this only on feature columns.
+
+Why it is important?
+* To give equal importanceto all the columns.
+
+Not to use scaling
+* for tree based models scaling techniques are not required
+* when the feature columns have same range values
+
+where we use scaling techniques?
+* Linear Regression
+* Logistic Regression
+* KNN
+* SVM
+* K Means clustering
+* PCA
+* Regularization
+
+
+Standardization
+* It is a type of scaling technique.
+* it will not the scales the values not between fixed range
+* we use this when we have outliers
+
+Normalization
+* It is also a type of scaling technique
+* It will scales the values but between the fixed range
+* The range is between 0 and 1
+* when we dont have outliers and the data is clean we use Normalization
+
+Standard scaler
+* It is a scaling preprocessing technique which sclaes the values between no range
+* we use this when we have less outliers
+* internally it uses z-score formula and scales the values useing its formula
+* after scaling we get mean near to 0 and standard deviation near to 1
+* Formula - (x-mean)/standard deviation
+
+Robust scaler
+* it is also a scalingpreprocessing technique which sclaes the vslues between no range
+* we use this when we have more outliers (because it uses median)
+* Formula - (x-Q2)/IQR
+
+MinMaxScaler
+* Formula - (x-xmin)/(xmax-xmin)
+
+
+assign- [intrdoduction datascience,cl.ml.llm.nlp,ai, with real time example
+wher we use when we use and why ml
+what is ml,
+why ml,
+traditional and ml, types of ml]
+
+* StandardScaler
+from sklearn.preprocessing import StandardScaler
+Scaler = StandardScaler()
+updated_xtrain = Scaler.fit_transform(xtrain)
+updated_xtest = Scaler.transform(xtest)
+
+* fit -> learns the pattern, the pattern is finding the mean and standard deviation 
+* transform -> transforms the values
+
+* Robust Scaler
+from sklearn.preprocessing import Robust Scaler
+Scaler = RobustScaler()
+updated_xtrain = Scaler.fit_transform(xtrain)
+updated_test = Scaler.transform(xtest)
+
+* fit -> learns the patter by finding the median
+
+* MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler
+Scaler = MinMax Scaler()
+updated_xtrain = Scaler.fit_transform(xtrain)
+updated_xtest = Scaler.transform(xtest)
+
+* fit -> Lerans the pattern by finding the minimum and maximum values
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# 22 june
+
+What is encoding?
+* It is a ml preprocessing technique which converts categorical values(string values) into numerical values
+
+Encoding Techniques
+1. Label Encoder
+2. OneHot Encoder
+3. Ordinal Encoder
+4. Target Encoder
+
+-----------------------
+LabelEncoder
+what is Label Encoder?
+* It is encoding preprocessing technique which accepte one column and encodes the values from zero
+
+Syntax:
+from sklearn.preprocessing import LabelEncoder
+encoder = LabelEncoder()
+encoder.fit_transform(xtrain[colname])
+encoder.fit_transform(xtrain[[colname]])
+encoder.transform(xtest[colname])
+encoder.transform(xtest[[colname]])
+
+How it works?
+It accepts only one column ----> Selects the unique values ----> Sorts by alphabetical(ascending) order ----> assigns the values from zero
+  col 1   
+    a11             selects unique values             Sorts by alphabetical order              assigns the values from zero
+    a12    ---->     a11, a12,b1 ,a13      ----->      a11, a12, a13, b1           ------>       a11  -   0  
+    b1                                                                                           a12  -   1
+    a13                                                                                          a13  -   2
+    b1                                                                                           b1   -   3
+
+
+When to use label encoder?
+* when we have only one categorical column, then we use label encoder
+* For less unique values we use label encoder (<=10)
+* Mostly we use this for target column (classification scenarios)
+
+When not to use label encoder?
+* when we have more categorical columns then we should not use label encoder
+* when we have more unique values then we should not use label encoder (>10)
+
+* fit_transform -> it findss the labels and then assigns the vlaues
+* transform -> 
+Scenario 1                   scenario 2
+xtest  |  values        xtest   |   values
+  a11       0             a15       error
+  a11       0
+  b1        3
+  a13       2
+
+-----------------------------------------------
+
+OneHot Encoder
+What is onehot encoder?
+* It is encoding preprocessing technique which accepts 2D and encodes binary values
+
+Syntax:
+from sklearn.preprocessing import OneHot Encoder
+encoder = OneHot Encoder(handle_unknown="ignore"|"error"(default), spare_output = True(default) | False)
+
+when to use OneHot Encoder?
+* when feature columns are having two or more columns then we use onehot encoder
+* For less unique values we use label encoder (<=10)
+
+when not to use OneHot Encoder?
+* when we have more unique vlaues
+
+How it works?
+  col 1    |    col 2            selects the unique values from all the columns            Sorts by ascending order                    Creates the cols based on unique values
+   a11     |      s2                col 1     |     col 2                                     col 1    |    col 2                col1_a11  |  col1_a13  |  col1_b1  |  col2_s1  |  col2_s2
+   a11     |      s1                  a11     |       s2                                       a11           s1                     1            0           0            0           1
+   b1      |      s2    ===>          b1      |       s1                            ===>       a13           s2        ===>         1            0           0            1           0
+   a13     |      s2                  a13                                                      b1                                   0            0           1            0           1
+   b1      |      s1                                                                                                                0            1           0            0           1
+                                                                                                                                    0            0           1            1           0
+unknown-labels
+* we can handle umknown labels on onehotencoder by using handle_unknown = "error"
+* by defalul it will give error but we can change that to ignore
+* if we give ignore it will assign 0 for that value ---> that means it is not present
+
+---------------------
+
+Ordinal Encoder
+what is Ordinal encoder?
+* It is encoder preprocessing technique which encodes the values based on the order
+* It accepts 2D
+
+Syntax:   (with order)
+from sklearn.preprocessing import Ordinal Encoder
+encoder = Ordinal Encoder(categories = [[col_1 order],[col_2 order]])    ---->[['a1'.'b1','a12'.'b2'],['High School','UG','PG','PhD']]
+encoder.fit_transform(xtrain)   --->  [col_s,col_a]
+encoder = Ordinal Encoder(handle_unknown = "error"(default) | "use_encoded_value", unknown_value = None |-1)
+
+when to use?
+* when feature columns follows order
+* when we have less unique values
+
+when not to use?
+* when we have more unique values
+
+
+How it works? (without order)
+col_s   |   col1_a                  Selects unique values from all the cols              Sorts by ascending order            assigns the value
+  a1        High School                col_s   |   col_a                                   col_s  |  col_a                     col_s      |    col_a
+  a12        UG             ===>         a1          High School               ===>          a1      high school     ===>      a1 -> 0        high school -> 0
+  b1         PG                          a12          UG                                     a12      PG                       a12 -> 1        pg -> 1
+  b2         PhD                         b1           pG                                     b1       PhD                      b1 -> 2         phd -> 2
+                                         b2           PhD                                    b2       UG                       b2 ->3          ug -> 3
+                                
+unknown-labels
+* we can handle umknown labels on onehotencoder by using handle_unknown = "error"
+* by defalul it will give error but we can change that to use encoded values
+* and changing that to (-1)
+
+encoder = Ordinal Encoder(handle_unknown = "error"(default) | "use_encoded_value", unknown_value = None |-1)
+
+---------------------------------
+
+Target Encoder
+what is Target Encoder?
+* It is an encoding preprocessing technique which encodes the values based on target column 
+* If target column is continuous values then it takes average 
+* if the target column is categorical values then it takes majority
+
+Syntax:
+from category_encoders import TargetEncoder
+encoder = TargetEncoder()
+encoder.fit_transform(xtrain, ytrain)
+encoder.transform(xtest)
+
+data                                       Step1:                                       Step 2:                                 step 3:
+col_1   |    col_2    |   Target           groups the unique values                     takes the mean                          transforms the values
+  S            A1          100                col_1              col_2                     col_1             col_2               col_1    |    col_2
+  I            A1          200    ===>     S    |   100       A1   |  100,200    ===>    S   |   100       A1  |  150    ===>      100    |     150  
+  U            A2           50             I    |   200       A2   |  50,300             I   |   200       A2  |  175              200    |     150
+  U            A2          300             U    |  50,300                                U   |   175                               175    |     175
+                                                                                                                                   175    |     175
+
+When to use?
+* when we have more unique values                                                                                                                               
