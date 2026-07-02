@@ -43,6 +43,9 @@ What and all techniques logistic regression uses internally?
 4. Regularization techniques (l1,l2, elastic net)
 5. Gradient descent
 
+* Internally it uses softmax instead of sigmoid for more than two labels
+* sag and saga we use when we have more features ...that scenario we get during sentence based classification
+
 -------------------------------------------------------------------------------------------------
 
 Loss function
@@ -101,3 +104,10 @@ Where we use gradient descent in machine learning?
 * logistic regression internally uses gradient descent to find the bea=st weights
 * extreme gradient boosting algorithm (Xg Boost) uses gradient descent to find the best weights
 * Regularization techniques uses gradient descent to find the best weights and rduces the variance
+
+How to find the dataset is imbalanced or not?
+* By using value-counts which gives count of uniques values in the target column
+
+How to handle imbalanced dataset?
+* class_weight = "balanced"
+* Re-sampling techniques
