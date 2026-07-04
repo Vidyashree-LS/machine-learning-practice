@@ -111,3 +111,64 @@ How to find the dataset is imbalanced or not?
 How to handle imbalanced dataset?
 * class_weight = "balanced"
 * Re-sampling techniques
+
+----------------------------------------------------------------------------------------------------------------------
+
+Metrics is model evaluation method
+
+Classification metrics
+1. Confusion Matrix
+2. Precision score
+3. Recall score
+4. f1- score
+5. Accuracy
+
+Confusion Matrix
+* It is a clasiification evaluation metrics which tells out of all the samples how many samples are correctly and wrongly predicted from the class labels
+                      predicted
+                   0             1
+       (300)  0    TN            FP             100   |    200
+actual                                ==>
+       (700)  1    FN            Tp             500   |    200
+
+
+example:                               predicted
+total samples                    0    80            20
+* spam - 400       ===>   actual                            ===>   the model performance is good becuse it predicting 80 lebels  correctly as not spam out of 100 smaples and 300 labels correctly as spam out of 400 samples
+* not spam -100                  1   100           300
+
+Syntax:
+from sklearn.metrics import confusion_matrix
+confusion_matrix(actual_output, predicted_output)
+
+for train data:
+confusion_matrix(ytrain,y_pred_train)
+
+for test data:
+confusion_matrix(ytset, y_pred_test)
+
+------------------------------
+
+Precision_score
+* It is classification metrics which tells out of all the predicted values how much percentage values are cerrectly predicted 
+
+precision score for positive label:
+* out of all the predicted positive labels how much percentage labels are predicted as positive
+* formula: TP/(TP+FP)
+
+* forst conclusion ---> out of all the predicted positive labels (400) , 50% samples are correctly predicted as positive
++second conclusion for sapma and not spam ----> out of all the predicted spam labels(320), 93.75% samples are correctly predicted as spam
+
+precision score for negative labels:
+* out of sll the predicted negative labels how much percentage labels are predicted as negative
+* formula: TN/(TN+FN)
+
+Syntax:
+from sklearn.metrics import Precision_score
+Precision_score(actual_output, predicted_output,pos_label=1)
+
+for train data:
+Precision_score(ytrain,y_pred_train)
+
+for test data:
+Precision_score(ytset, y_pred_test)
