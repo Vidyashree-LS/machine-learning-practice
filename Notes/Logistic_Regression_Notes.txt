@@ -121,7 +121,7 @@ Classification metrics
 2. Precision score
 3. Recall score
 4. f1- score
-5. Accuracy
+5. Accuracy score
 
 Confusion Matrix
 * It is a clasiification evaluation metrics which tells out of all the samples how many samples are correctly and wrongly predicted from the class labels
@@ -172,3 +172,45 @@ Precision_score(ytrain,y_pred_train)
 
 for test data:
 Precision_score(ytset, y_pred_test)
+
+-------------------------------
+
+Recall 
+* it is a classification metrics which tells out of all the actual values how many values are correctly predicted
+
+Recall score for negative labels:
+* out of all the actual negative labels how maany labels are correctly predicted as negative
+Formual :
+=TN/(TN+FP)
+
+Recall score for positive labels:
+* out of all the actual positive labels how many labels are correctly predicted as positive
+Formula:
+=TP/(TP+FN)
+
+example:
+negative: 100/300 = 33.33%
+positive: 200/700 = 28.5%
+
+--------------------------------
+
+Accuracy score
+what is accuracy score?
+* It is clasiification metrics which tells out of all the samples how many samples are correctly predicted.
+
+when not to use accuracy score?
+* If the class labels are imbalanced we should not use accuracy score
+* because it gives wrong conclusions
+* for example :        0        1
+              (1000)0  1000     0  ==> 100%
+              (200) 1  200      0  ==> 0%
+       In the above example it is not predicting not even 1 label as positive 
+
+when to use accuracy score?
+* when we have balanced class labels
+
+-----------------------------------
+
+f1 score
+what is f1 score?
+* It is classification metrics which balances both precision and recall score and we use this fro imbalanced dataset
