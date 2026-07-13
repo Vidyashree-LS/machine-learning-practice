@@ -46,6 +46,26 @@
 
 # splitter
 - It helps to select the best split
-- it has two values  
+- it has two values best and random
+- best uses criterion to find the best splitter
+
+# max_depeth
+- Default value is none
+- we can use integer values instead of none
+- It controls the the depth of the tree we use this when we have more number of samples
+
+# min_samples_split 
+- min_samples_split = 2 | int
+- it checks whether node contains minimum 2 samples or not
+
+# min_samples_leaf
+- min_samples_leaf = 1 | int
+- It checks whether the leaf node conatins minimum (1) samples or not 
+
+* if any one condition is invalid the entire split is invalid
+
+
+
+
 
 
