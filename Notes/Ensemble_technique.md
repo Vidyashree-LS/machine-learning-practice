@@ -1,6 +1,6 @@
 # Ensemble Technique
 - It is Ml technique which uses multiplr algorithms to improve the model performance 
-1, Bagging
+1. Bagging
 2. Boosting
 
 ## when we use Ensemble techniques?

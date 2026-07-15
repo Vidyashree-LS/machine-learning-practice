@@ -24,7 +24,7 @@ what logistic means?
 Why it comes under regression?
 * Internally it uses regression formula (z)
 * z--->w1x1 + w2x2 + c
-* here in logistic regression, weights or not slope 
+* here in logistic regression, weights are not slope 
 * weights are importance given to the feature
 
 Why not linear regression for binary values?
